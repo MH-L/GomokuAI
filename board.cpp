@@ -14,9 +14,17 @@ board::board(int size) {
 }
 
 bool board::makeMove(int x, int y, int turn) {
-	if (x >= size || y >= size || (turn != SENTE_STONE && turn != GOTE_STONE))
+	if (x >= size || y >= size || (turn != SENTE_STONE && turn != GOTE_STONE)
+		|| grid[y][x] != EMPTY_SPOT)
 		return false;
 	grid[y][x] = turn;
+	return true;
+}
+
+bool board::withdraw(int x, int y) {
+	if (x >= size || y >= size || grid[y][x] == EMPTY_SPOT)
+		return false;
+	grid[y][x] = EMPTY_SPOT;
 	return true;
 }
 
